@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+mlflow/
+mlruns/
+models/
+data/interim/
+data/processed/
+notebooks/EDA_output/data/
+
+.env
+.DS_Store
