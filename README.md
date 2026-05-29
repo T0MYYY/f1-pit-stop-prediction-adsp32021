@@ -149,6 +149,8 @@ F1-Pit-Stop-Prediction/
 
 Dataset: [Predicting F1 Pit Stops](https://kaggle.com/competitions/playground-series-s6e5) — Yao Yan, Walter Reade & Elizabeth Park (Kaggle Playground Series, 2026). Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
+> **Data is not committed.** `data/train.csv` and `data/test.csv` are kept out of git to keep the repo lean. Download them from the [Kaggle competition](https://kaggle.com/competitions/playground-series-s6e5) (`kaggle competitions download -c playground-series-s6e5`) and unzip into `data/`. The DVC pipeline (`dvc repro`) and `src.ingest` both read `data/train.csv`.
+
 ---
 
 ## ⚡ Quick Start
@@ -163,6 +165,7 @@ cd F1-Pit-Stop-Prediction
 
 python3.12 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+# Download data from Kaggle into data/ (train.csv, test.csv) — see "Dataset & License" below
 pytest tests/                                            # 2/2 smoke tests
 python -m src.inference --input data/train.csv --year 2025   # batch predict on 2025 holdout
 ```
@@ -306,7 +309,7 @@ dvc repro   # replays ingest + preprocess; does not run train/register
 - **CatBoost is slow inside arm64 Docker.** A 600s-budget DAG run can take 20–25 min; host venv is ~2× faster.
 - **Don't `rm -rf mlflow/` while Docker is up.** Run `docker compose down` first.
 - **Switching host ↔ Docker:** wipe `mlflow/` and `mlruns/` between environments. `models/champion/` survives.
-- **`data/train.csv` is >50 MB.** GitHub warns but does not block — committed for grader convenience.
+- **`data/train.csv` / `data/test.csv` are not committed.** Download from Kaggle (see [Dataset & License](#-dataset--license)); they're gitignored to keep the repo lean.
 - **HF Space requires `flaml` and `lightgbm`** even though the champion is XGBoost — the FLAML wrapper leaves references in the pickle. See [`deploy/hf/requirements.txt`](deploy/hf/requirements.txt).
 
 ---

@@ -24,3 +24,7 @@ logs/
 
 # monitoring reports (HTML too large, keep JSON only)
 monitoring_reports/*.html
+
+# Raw Kaggle dataset — download separately (see README "Dataset & License"), not committed
+data/train.csv
+data/test.csv
